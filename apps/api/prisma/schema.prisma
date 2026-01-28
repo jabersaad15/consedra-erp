@@ -1,0 +1,884 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============ PLATFORM ============
+
+model Tenant {
+  id        String   @id @default(uuid())
+  name      String
+  slug      String   @unique
+  logoUrl   String?
+  isActive  Boolean  @default(true)
+  ownerId   String?
+  settings  Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner              User?               @relation("TenantOwner", fields: [ownerId], references: [id])
+  users              User[]              @relation("TenantUsers")
+  regions            Region[]
+  branches           Branch[]
+  departments        Department[]
+  positions          Position[]
+  roles              RoleDefinition[]
+  enabledModules     TenantModule[]
+  workflows          Workflow[]
+  formDefinitions    FormDefinition[]
+  reportDefinitions  ReportDefinition[]
+  projects           Project[]
+  tasks              Task[]
+  documents          Document[]
+  notifications      Notification[]
+  auditLogs          AuditLog[]
+  connectors         Connector[]
+  checklists         Checklist[]
+  inspections        Inspection[]
+  issues             Issue[]
+  employees          Employee[]
+  leaveRequests      LeaveRequest[]
+  expenses           Expense[]
+  costCenters        CostCenter[]
+  journalEntries     JournalEntry[]
+  suppliers          Supplier[]
+  purchaseRequisitions PurchaseRequisition[]
+  purchaseOrders     PurchaseOrder[]
+  inventoryItems     InventoryItem[]
+  warehouses         Warehouse[]
+  stockLevels        StockLevel[]
+  stockTransfers     StockTransfer[]
+  salesSummaries     SalesSummary[]
+  crmTickets         CrmTicket[]
+  campaigns          Campaign[]
+  coupons            Coupon[]
+  supportTickets     SupportTicket[]
+  itAssets           ITAsset[]
+  qualityChecklists  QualityChecklist[]
+  nonconformances    Nonconformance[]
+  recipes            Recipe[]
+  productionOrders   ProductionOrder[]
+  approvalRequests   ApprovalRequest[]
+  formSubmissions    FormSubmission[]
+  ownershipTransfers OwnershipTransfer[]
+
+  @@map("tenants")
+}
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String
+  firstName     String
+  lastName      String
+  avatarUrl     String?
+  locale        String    @default("en")
+  isSuperAdmin  Boolean   @default(false)
+  isActive      Boolean   @default(true)
+  tenantId      String?
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+
+  tenant            Tenant?          @relation("TenantUsers", fields: [tenantId], references: [id])
+  ownedTenants      Tenant[]         @relation("TenantOwner")
+  roleAssignments   UserRole[]
+  refreshTokens     RefreshToken[]
+  auditLogs         AuditLog[]       @relation("AuditActor")
+  notifications     Notification[]
+  documents         Document[]       @relation("DocumentUploader")
+
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@map("refresh_tokens")
+}
+
+model OwnershipTransfer {
+  id           String    @id @default(uuid())
+  tenantId     String
+  fromUserId   String
+  toUserEmail  String
+  token        String    @unique
+  reason       String
+  status       String    @default("PENDING")
+  expiresAt    DateTime
+  confirmedAt  DateTime?
+  createdAt    DateTime  @default(now())
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  @@map("ownership_transfers")
+}
+
+// ============ RBAC ============
+
+model RoleDefinition {
+  id          String   @id @default(uuid())
+  name        String
+  key         String
+  description String?
+  isSystem    Boolean  @default(false)
+  tenantId    String?
+  createdAt   DateTime @default(now())
+  tenant      Tenant?          @relation(fields: [tenantId], references: [id])
+  permissions RolePermission[]
+  userRoles   UserRole[]
+  @@unique([key, tenantId])
+  @@map("role_definitions")
+}
+
+model PermissionDefinition {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  name        String
+  category    String
+  description String?
+  rolePermissions RolePermission[]
+  @@map("permission_definitions")
+}
+
+model RolePermission {
+  id           String @id @default(uuid())
+  roleId       String
+  permissionId String
+  role       RoleDefinition       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission PermissionDefinition @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  @@unique([roleId, permissionId])
+  @@map("role_permissions")
+}
+
+model UserRole {
+  id        String  @id @default(uuid())
+  userId    String
+  roleId    String
+  scopeType String  @default("COMPANY")
+  scopeId   String? @default("")
+  user User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role RoleDefinition @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  @@unique([userId, roleId, scopeType, scopeId])
+  @@map("user_roles")
+}
+
+// ============ ORG STRUCTURE ============
+
+model Region {
+  id       String @id @default(uuid())
+  name     String
+  code     String
+  tenantId String
+  tenant   Tenant   @relation(fields: [tenantId], references: [id])
+  branches Branch[]
+  @@unique([code, tenantId])
+  @@map("regions")
+}
+
+model Branch {
+  id        String  @id @default(uuid())
+  name      String
+  code      String
+  type      String  @default("BRANCH")
+  regionId  String
+  tenantId  String
+  address   String?
+  phone     String?
+  managerId String?
+  isActive  Boolean @default(true)
+  tenant     Tenant  @relation(fields: [tenantId], references: [id])
+  region     Region  @relation(fields: [regionId], references: [id])
+  warehouses Warehouse[]
+  @@unique([code, tenantId])
+  @@map("branches")
+}
+
+model Department {
+  id       String  @id @default(uuid())
+  name     String
+  code     String
+  tenantId String
+  headId   String?
+  tenant    Tenant     @relation(fields: [tenantId], references: [id])
+  positions Position[]
+  @@unique([code, tenantId])
+  @@map("departments")
+}
+
+model Position {
+  id           String @id @default(uuid())
+  title        String
+  departmentId String
+  tenantId     String
+  tenant     Tenant     @relation(fields: [tenantId], references: [id])
+  department Department @relation(fields: [departmentId], references: [id])
+  @@map("positions")
+}
+
+// ============ MODULE MANAGER ============
+
+model TenantModule {
+  id        String  @id @default(uuid())
+  tenantId  String
+  moduleKey String
+  isEnabled Boolean @default(true)
+  order     Int     @default(0)
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  @@unique([tenantId, moduleKey])
+  @@map("tenant_modules")
+}
+
+// ============ WORKFLOW & APPROVALS ============
+
+model Workflow {
+  id        String @id @default(uuid())
+  name      String
+  moduleKey String
+  tenantId  String
+  isActive  Boolean @default(true)
+  tenant Tenant         @relation(fields: [tenantId], references: [id])
+  steps  WorkflowStep[]
+  approvalRequests ApprovalRequest[]
+  @@map("workflows")
+}
+
+model WorkflowStep {
+  id             String @id @default(uuid())
+  workflowId     String
+  stepOrder      Int
+  approverRoleKey String
+  description    String?
+  workflow Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  @@map("workflow_steps")
+}
+
+model ApprovalRequest {
+  id          String   @id @default(uuid())
+  workflowId  String
+  entityType  String
+  entityId    String
+  status      String   @default("DRAFT")
+  currentStep Int      @default(0)
+  requesterId String
+  tenantId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  workflow  Workflow           @relation(fields: [workflowId], references: [id])
+  tenant    Tenant             @relation(fields: [tenantId], references: [id])
+  comments  ApprovalComment[]
+  @@map("approval_requests")
+}
+
+model ApprovalComment {
+  id         String   @id @default(uuid())
+  requestId  String
+  authorId   String
+  authorName String
+  text       String
+  action     String?
+  createdAt  DateTime @default(now())
+  request ApprovalRequest @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  @@map("approval_comments")
+}
+
+// ============ FORMS BUILDER ============
+
+model FormDefinition {
+  id         String @id @default(uuid())
+  name       String
+  moduleKey  String
+  fields     Json
+  workflowId String?
+  tenantId   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  tenant      Tenant           @relation(fields: [tenantId], references: [id])
+  submissions FormSubmission[]
+  @@map("form_definitions")
+}
+
+model FormSubmission {
+  id           String   @id @default(uuid())
+  formId       String
+  data         Json
+  submittedById String
+  approvalId   String?
+  tenantId     String
+  createdAt    DateTime @default(now())
+  form   FormDefinition @relation(fields: [formId], references: [id])
+  tenant Tenant         @relation(fields: [tenantId], references: [id])
+  @@map("form_submissions")
+}
+
+// ============ REPORTS ============
+
+model ReportDefinition {
+  id       String @id @default(uuid())
+  name     String
+  moduleKey String
+  entity   String
+  filters  Json
+  columns  Json
+  groupBy  String?
+  tenantId String
+  createdAt DateTime @default(now())
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  @@map("report_definitions")
+}
+
+// ============ PROJECTS & TASKS ============
+
+model Project {
+  id          String    @id @default(uuid())
+  name        String
+  description String?
+  status      String    @default("PLANNING")
+  startDate   DateTime?
+  endDate     DateTime?
+  managerId   String?
+  tenantId    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  tasks  Task[]
+  @@map("projects")
+}
+
+model Task {
+  id          String    @id @default(uuid())
+  title       String
+  description String?
+  status      String    @default("TODO")
+  priority    String    @default("MEDIUM")
+  assigneeId  String?
+  projectId   String?
+  dueDate     DateTime?
+  branchId    String?
+  moduleKey   String?
+  tenantId    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  tenant  Tenant   @relation(fields: [tenantId], references: [id])
+  project Project? @relation(fields: [projectId], references: [id])
+  @@map("tasks")
+}
+
+// ============ NOTIFICATIONS ============
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  body      String
+  type      String   @default("INFO")
+  isRead    Boolean  @default(false)
+  link      String?
+  tenantId  String?
+  createdAt DateTime @default(now())
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenant Tenant? @relation(fields: [tenantId], references: [id])
+  @@map("notifications")
+}
+
+// ============ DOCUMENTS ============
+
+model Document {
+  id           String   @id @default(uuid())
+  name         String
+  mimeType     String
+  size         Int
+  path         String
+  entityType   String?
+  entityId     String?
+  uploadedById String
+  tenantId     String
+  tags         Json     @default("[]")
+  version      Int      @default(1)
+  createdAt    DateTime @default(now())
+  uploadedBy User   @relation("DocumentUploader", fields: [uploadedById], references: [id])
+  tenant     Tenant @relation(fields: [tenantId], references: [id])
+  @@map("documents")
+}
+
+// ============ AUDIT LOG ============
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  action     String
+  entityType String
+  entityId   String?
+  actorId    String
+  actorEmail String
+  tenantId   String?
+  metadata   Json?
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+  actor  User    @relation("AuditActor", fields: [actorId], references: [id])
+  tenant Tenant? @relation(fields: [tenantId], references: [id])
+  @@index([tenantId, createdAt])
+  @@index([actorId])
+  @@index([entityType, entityId])
+  @@map("audit_logs")
+}
+
+// ============ INTEGRATION HUB ============
+
+model Connector {
+  id       String  @id @default(uuid())
+  name     String
+  type     String
+  config   Json
+  mappings Json    @default("[]")
+  isActive Boolean @default(true)
+  tenantId String
+  lastRunAt DateTime?
+  tenant Tenant           @relation(fields: [tenantId], references: [id])
+  logs   IntegrationLog[]
+  @@map("connectors")
+}
+
+model IntegrationLog {
+  id          String   @id @default(uuid())
+  connectorId String
+  direction   String
+  status      String
+  payload     Json?
+  response    Json?
+  error       String?
+  retryCount  Int      @default(0)
+  createdAt   DateTime @default(now())
+  connector Connector @relation(fields: [connectorId], references: [id])
+  @@index([connectorId, createdAt])
+  @@map("integration_logs")
+}
+
+// ============ OPERATIONS ============
+
+model Checklist {
+  id          String    @id @default(uuid())
+  title       String
+  branchId    String
+  assigneeId  String?
+  frequency   String    @default("DAILY")
+  items       Json      @default("[]")
+  completedAt DateTime?
+  tenantId    String
+  createdAt   DateTime  @default(now())
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  @@map("checklists")
+}
+
+model Inspection {
+  id          String   @id @default(uuid())
+  branchId    String
+  inspectorId String
+  type        String
+  findings    String?
+  score       Float?
+  tenantId    String
+  createdAt   DateTime @default(now())
+  tenant Tenant  @relation(fields: [tenantId], references: [id])
+  issues Issue[]
+  @@map("inspections")
+}
+
+model Issue {
+  id           String    @id @default(uuid())
+  title        String
+  description  String?
+  severity     String    @default("MEDIUM")
+  status       String    @default("OPEN")
+  branchId     String
+  assigneeId   String?
+  inspectionId String?
+  closedAt     DateTime?
+  tenantId     String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  tenant     Tenant      @relation(fields: [tenantId], references: [id])
+  inspection Inspection? @relation(fields: [inspectionId], references: [id])
+  @@map("issues")
+}
+
+// ============ HR ============
+
+model Employee {
+  id             String    @id @default(uuid())
+  userId         String?
+  employeeNumber String
+  firstName      String
+  lastName       String
+  email          String
+  phone          String?
+  departmentId   String?
+  positionId     String?
+  branchId       String?
+  hireDate       DateTime
+  contractUrl    String?
+  tenantId       String
+  isActive       Boolean   @default(true)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+  tenant Tenant         @relation(fields: [tenantId], references: [id])
+  leaves LeaveRequest[]
+  @@unique([employeeNumber, tenantId])
+  @@map("employees")
+}
+
+model LeaveRequest {
+  id         String   @id @default(uuid())
+  employeeId String
+  type       String
+  startDate  DateTime
+  endDate    DateTime
+  status     String   @default("PENDING")
+  reason     String?
+  approvalId String?
+  tenantId   String
+  createdAt  DateTime @default(now())
+  employee Employee @relation(fields: [employeeId], references: [id])
+  tenant   Tenant   @relation(fields: [tenantId], references: [id])
+  @@map("leave_requests")
+}
+
+// ============ FINANCE ============
+
+model Expense {
+  id           String   @id @default(uuid())
+  description  String
+  amount       Float
+  currency     String   @default("SAR")
+  categoryId   String?
+  costCenterId String?
+  branchId     String?
+  submittedById String
+  status       String   @default("DRAFT")
+  receiptUrl   String?
+  approvalId   String?
+  tenantId     String
+  date         DateTime
+  createdAt    DateTime @default(now())
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  @@map("expenses")
+}
+
+model CostCenter {
+  id       String @id @default(uuid())
+  name     String
+  code     String
+  tenantId String
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  @@unique([code, tenantId])
+  @@map("cost_centers")
+}
+
+model JournalEntry {
+  id          String   @id @default(uuid())
+  date        DateTime
+  description String
+  lines       Json
+  tenantId    String
+  createdAt   DateTime @default(now())
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  @@map("journal_entries")
+}
+
+// ============ PURCHASING ============
+
+model Supplier {
+  id            String  @id @default(uuid())
+  name          String
+  contactPerson String?
+  email         String?
+  phone         String?
+  address       String?
+  tenantId      String
+  isActive      Boolean @default(true)
+  createdAt     DateTime @default(now())
+  tenant         Tenant          @relation(fields: [tenantId], references: [id])
+  purchaseOrders PurchaseOrder[]
+  @@map("suppliers")
+}
+
+model PurchaseRequisition {
+  id          String   @id @default(uuid())
+  number      String
+  requesterId String
+  branchId    String?
+  status      String   @default("DRAFT")
+  items       Json
+  approvalId  String?
+  tenantId    String
+  createdAt   DateTime @default(now())
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  @@unique([number, tenantId])
+  @@map("purchase_requisitions")
+}
+
+model PurchaseOrder {
+  id          String   @id @default(uuid())
+  number      String
+  supplierId  String
+  status      String   @default("DRAFT")
+  items       Json
+  totalAmount Float    @default(0)
+  currency    String   @default("SAR")
+  approvalId  String?
+  tenantId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tenant   Tenant   @relation(fields: [tenantId], references: [id])
+  supplier Supplier @relation(fields: [supplierId], references: [id])
+  @@unique([number, tenantId])
+  @@map("purchase_orders")
+}
+
+// ============ INVENTORY ============
+
+model InventoryItem {
+  id         String  @id @default(uuid())
+  name       String
+  sku        String
+  unit       String  @default("EA")
+  categoryId String?
+  minStock   Float?
+  tenantId   String
+  isActive   Boolean @default(true)
+  createdAt  DateTime @default(now())
+  tenant      Tenant       @relation(fields: [tenantId], references: [id])
+  stockLevels StockLevel[]
+  @@unique([sku, tenantId])
+  @@map("inventory_items")
+}
+
+model Warehouse {
+  id       String @id @default(uuid())
+  name     String
+  branchId String?
+  type     String @default("BRANCH")
+  tenantId String
+  tenant      Tenant       @relation(fields: [tenantId], references: [id])
+  branch      Branch?      @relation(fields: [branchId], references: [id])
+  stockLevels StockLevel[]
+  @@map("warehouses")
+}
+
+model StockLevel {
+  id          String   @id @default(uuid())
+  itemId      String
+  warehouseId String
+  quantity    Float    @default(0)
+  tenantId    String
+  lastUpdated DateTime @default(now())
+  item      InventoryItem @relation(fields: [itemId], references: [id])
+  warehouse Warehouse     @relation(fields: [warehouseId], references: [id])
+  tenant    Tenant        @relation(fields: [tenantId], references: [id])
+  @@unique([itemId, warehouseId])
+  @@map("stock_levels")
+}
+
+model StockTransfer {
+  id              String   @id @default(uuid())
+  fromWarehouseId String
+  toWarehouseId   String
+  items           Json
+  status          String   @default("PENDING")
+  tenantId        String
+  createdAt       DateTime @default(now())
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  @@map("stock_transfers")
+}
+
+// ============ SALES ============
+
+model SalesSummary {
+  id               String   @id @default(uuid())
+  branchId         String
+  date             DateTime
+  totalSales       Float    @default(0)
+  totalOrders      Int      @default(0)
+  paymentBreakdown Json     @default("{}")
+  source           String   @default("MANUAL")
+  tenantId         String
+  createdAt        DateTime @default(now())
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  @@unique([branchId, date, source])
+  @@map("sales_summaries")
+}
+
+// ============ CRM ============
+
+model CrmTicket {
+  id            String    @id @default(uuid())
+  number        String
+  customerName  String
+  customerPhone String?
+  customerEmail String?
+  subject       String
+  description   String?
+  category      String
+  status        String    @default("OPEN")
+  priority      String    @default("MEDIUM")
+  branchId      String?
+  assigneeId    String?
+  slaDeadline   DateTime?
+  resolvedAt    DateTime?
+  tenantId      String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  @@unique([number, tenantId])
+  @@map("crm_tickets")
+}
+
+// ============ MARKETING ============
+
+model Campaign {
+  id        String    @id @default(uuid())
+  name      String
+  type      String    @default("PROMOTION")
+  status    String    @default("DRAFT")
+  startDate DateTime
+  endDate   DateTime?
+  budget    Float?
+  notes     String?
+  tenantId  String
+  createdAt DateTime  @default(now())
+  tenant  Tenant   @relation(fields: [tenantId], references: [id])
+  coupons Coupon[]
+  @@map("campaigns")
+}
+
+model Coupon {
+  id            String    @id @default(uuid())
+  code          String
+  campaignId    String?
+  discountType  String    @default("PERCENTAGE")
+  discountValue Float
+  maxUses       Int?
+  usedCount     Int       @default(0)
+  expiresAt     DateTime?
+  tenantId      String
+  createdAt     DateTime  @default(now())
+  campaign Campaign? @relation(fields: [campaignId], references: [id])
+  tenant   Tenant    @relation(fields: [tenantId], references: [id])
+  @@unique([code, tenantId])
+  @@map("coupons")
+}
+
+// ============ IT HELPDESK ============
+
+model SupportTicket {
+  id          String   @id @default(uuid())
+  number      String
+  title       String
+  description String?
+  category    String
+  status      String   @default("OPEN")
+  priority    String   @default("MEDIUM")
+  requesterId String
+  assigneeId  String?
+  assetId     String?
+  tenantId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  @@unique([number, tenantId])
+  @@map("support_tickets")
+}
+
+model ITAsset {
+  id           String  @id @default(uuid())
+  name         String
+  type         String  @default("OTHER")
+  serialNumber String?
+  assignedToId String?
+  branchId     String?
+  status       String  @default("ACTIVE")
+  tenantId     String
+  createdAt    DateTime @default(now())
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  @@map("it_assets")
+}
+
+// ============ QUALITY ============
+
+model QualityChecklist {
+  id        String   @id @default(uuid())
+  title     String
+  branchId  String
+  type      String   @default("CUSTOM")
+  items     Json     @default("[]")
+  score     Float?
+  auditorId String
+  tenantId  String
+  createdAt DateTime @default(now())
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  @@map("quality_checklists")
+}
+
+model Nonconformance {
+  id          String    @id @default(uuid())
+  title       String
+  description String?
+  branchId    String
+  category    String
+  severity    String    @default("MINOR")
+  status      String    @default("OPEN")
+  assigneeId  String?
+  capaId      String?
+  tenantId    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  closedAt    DateTime?
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  @@map("nonconformances")
+}
+
+// ============ PRODUCTION ============
+
+model Recipe {
+  id             String @id @default(uuid())
+  name           String
+  code           String
+  outputItemId   String
+  outputQuantity Float
+  outputUnit     String @default("EA")
+  materials      Json
+  instructions   String?
+  tenantId       String
+  createdAt      DateTime @default(now())
+  tenant           Tenant            @relation(fields: [tenantId], references: [id])
+  productionOrders ProductionOrder[]
+  @@unique([code, tenantId])
+  @@map("recipes")
+}
+
+model ProductionOrder {
+  id             String    @id @default(uuid())
+  number         String
+  recipeId       String
+  quantity        Float
+  status         String    @default("PLANNED")
+  batchNumber    String?
+  yieldQuantity  Float?
+  wasteQuantity  Float?
+  startDate      DateTime?
+  completedDate  DateTime?
+  tenantId       String
+  createdAt      DateTime  @default(now())
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+  recipe Recipe @relation(fields: [recipeId], references: [id])
+  @@unique([number, tenantId])
+  @@map("production_orders")
+}

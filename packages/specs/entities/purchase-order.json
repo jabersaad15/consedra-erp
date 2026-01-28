@@ -1,0 +1,70 @@
+{
+  "key": "purchaseOrder",
+  "name": "Purchase Order",
+  "module": "purchasing",
+  "fields": [
+    {
+      "key": "number",
+      "label": "PO Number",
+      "type": "text",
+      "required": true,
+      "autoGenerate": true
+    },
+    {
+      "key": "supplierId",
+      "label": "Supplier",
+      "type": "select",
+      "required": true,
+      "source": "suppliers"
+    },
+    {
+      "key": "status",
+      "label": "Status",
+      "type": "select",
+      "required": true,
+      "options": [
+        "DRAFT",
+        "PENDING_APPROVAL",
+        "APPROVED",
+        "ORDERED",
+        "PARTIALLY_RECEIVED",
+        "RECEIVED",
+        "CANCELLED"
+      ]
+    },
+    {
+      "key": "items",
+      "label": "Line Items",
+      "type": "array",
+      "required": true
+    },
+    {
+      "key": "totalAmount",
+      "label": "Total Amount",
+      "type": "number",
+      "required": false
+    },
+    {
+      "key": "currency",
+      "label": "Currency",
+      "type": "select",
+      "options": [
+        "SAR",
+        "USD",
+        "EUR",
+        "GBP"
+      ]
+    }
+  ],
+  "listColumns": [
+    "number",
+    "supplierId",
+    "status",
+    "totalAmount",
+    "currency",
+    "createdAt"
+  ],
+  "searchFields": [
+    "number"
+  ]
+}

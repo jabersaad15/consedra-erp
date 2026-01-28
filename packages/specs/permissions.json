@@ -1,0 +1,185 @@
+{
+  "permissions": [
+    {
+      "key": "view",
+      "name": "View",
+      "category": "general"
+    },
+    {
+      "key": "create",
+      "name": "Create",
+      "category": "general"
+    },
+    {
+      "key": "update",
+      "name": "Update",
+      "category": "general"
+    },
+    {
+      "key": "delete",
+      "name": "Delete",
+      "category": "general"
+    },
+    {
+      "key": "approve",
+      "name": "Approve",
+      "category": "workflow"
+    },
+    {
+      "key": "export",
+      "name": "Export",
+      "category": "reports"
+    },
+    {
+      "key": "manage-users",
+      "name": "Manage Users",
+      "category": "admin"
+    },
+    {
+      "key": "manage-roles",
+      "name": "Manage Roles",
+      "category": "admin"
+    },
+    {
+      "key": "manage-modules",
+      "name": "Manage Modules",
+      "category": "admin"
+    },
+    {
+      "key": "manage-settings",
+      "name": "Manage Settings",
+      "category": "admin"
+    },
+    {
+      "key": "assign",
+      "name": "Assign",
+      "category": "workflow"
+    },
+    {
+      "key": "close",
+      "name": "Close",
+      "category": "workflow"
+    },
+    {
+      "key": "transfer",
+      "name": "Transfer Ownership",
+      "category": "admin"
+    },
+    {
+      "key": "impersonate",
+      "name": "Impersonate User",
+      "category": "admin"
+    }
+  ],
+  "roleDefaults": {
+    "OWNER": [
+      "view",
+      "create",
+      "update",
+      "delete",
+      "approve",
+      "export",
+      "manage-users",
+      "manage-roles",
+      "manage-modules",
+      "manage-settings",
+      "assign",
+      "close",
+      "transfer"
+    ],
+    "HEAD_OF_DEPARTMENT": [
+      "view",
+      "create",
+      "update",
+      "approve",
+      "export",
+      "assign",
+      "close"
+    ],
+    "OPERATIONS_MANAGER": [
+      "view",
+      "create",
+      "update",
+      "approve",
+      "export",
+      "assign",
+      "close"
+    ],
+    "FACTORY_MANAGER": [
+      "view",
+      "create",
+      "update",
+      "approve",
+      "export",
+      "assign",
+      "close"
+    ],
+    "PRODUCTION_MANAGER": [
+      "view",
+      "create",
+      "update",
+      "approve",
+      "export",
+      "assign"
+    ],
+    "AREA_MANAGER": [
+      "view",
+      "create",
+      "update",
+      "approve",
+      "export",
+      "assign"
+    ],
+    "BRANCH_MANAGER": [
+      "view",
+      "create",
+      "update",
+      "approve",
+      "assign",
+      "close"
+    ],
+    "ASSISTANT_BRANCH_MANAGER": [
+      "view",
+      "create",
+      "update",
+      "assign"
+    ],
+    "FINANCE_MANAGER": [
+      "view",
+      "create",
+      "update",
+      "approve",
+      "export"
+    ],
+    "HR_MANAGER": [
+      "view",
+      "create",
+      "update",
+      "approve",
+      "export",
+      "manage-users"
+    ],
+    "IT_MANAGER": [
+      "view",
+      "create",
+      "update",
+      "approve",
+      "assign",
+      "close"
+    ],
+    "MARKETING_MANAGER": [
+      "view",
+      "create",
+      "update",
+      "export"
+    ],
+    "EMPLOYEE": [
+      "view",
+      "create"
+    ],
+    "CASHIER": [
+      "view",
+      "create"
+    ]
+  }
+}

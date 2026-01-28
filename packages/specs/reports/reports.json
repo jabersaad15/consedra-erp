@@ -1,0 +1,237 @@
+[
+  {
+    "key": "employee-list",
+    "name": "Employee Directory",
+    "module": "hr",
+    "entity": "employee",
+    "columns": [
+      "employeeNumber",
+      "firstName",
+      "lastName",
+      "email",
+      "departmentId",
+      "branchId",
+      "hireDate"
+    ],
+    "filters": [
+      "departmentId",
+      "branchId"
+    ],
+    "exports": [
+      "csv",
+      "excel",
+      "pdf"
+    ]
+  },
+  {
+    "key": "expense-summary",
+    "name": "Expense Summary",
+    "module": "finance",
+    "entity": "expense",
+    "columns": [
+      "description",
+      "amount",
+      "currency",
+      "categoryId",
+      "costCenterId",
+      "branchId",
+      "date",
+      "status"
+    ],
+    "filters": [
+      "branchId",
+      "costCenterId",
+      "status",
+      "date"
+    ],
+    "groupBy": "costCenterId",
+    "exports": [
+      "csv",
+      "excel",
+      "pdf"
+    ]
+  },
+  {
+    "key": "po-status",
+    "name": "Purchase Order Status",
+    "module": "purchasing",
+    "entity": "purchaseOrder",
+    "columns": [
+      "number",
+      "supplierId",
+      "status",
+      "totalAmount",
+      "createdAt"
+    ],
+    "filters": [
+      "status",
+      "supplierId"
+    ],
+    "exports": [
+      "csv",
+      "excel",
+      "pdf"
+    ]
+  },
+  {
+    "key": "inventory-levels",
+    "name": "Stock Levels",
+    "module": "inventory",
+    "entity": "stockLevel",
+    "columns": [
+      "itemId",
+      "warehouseId",
+      "quantity",
+      "lastUpdated"
+    ],
+    "filters": [
+      "warehouseId"
+    ],
+    "exports": [
+      "csv",
+      "excel"
+    ]
+  },
+  {
+    "key": "crm-tickets-report",
+    "name": "CRM Tickets Report",
+    "module": "crm",
+    "entity": "crmTicket",
+    "columns": [
+      "number",
+      "customerName",
+      "category",
+      "status",
+      "priority",
+      "branchId",
+      "createdAt",
+      "resolvedAt"
+    ],
+    "filters": [
+      "status",
+      "priority",
+      "branchId",
+      "category"
+    ],
+    "groupBy": "category",
+    "exports": [
+      "csv",
+      "excel",
+      "pdf"
+    ]
+  },
+  {
+    "key": "sales-by-branch",
+    "name": "Sales by Branch",
+    "module": "sales",
+    "entity": "salesSummary",
+    "columns": [
+      "branchId",
+      "date",
+      "totalSales",
+      "totalOrders"
+    ],
+    "filters": [
+      "branchId",
+      "date"
+    ],
+    "groupBy": "branchId",
+    "exports": [
+      "csv",
+      "excel",
+      "pdf"
+    ]
+  },
+  {
+    "key": "production-orders",
+    "name": "Production Orders",
+    "module": "production",
+    "entity": "productionOrder",
+    "columns": [
+      "number",
+      "recipeName",
+      "quantity",
+      "status",
+      "yieldQuantity",
+      "wasteQuantity",
+      "completedDate"
+    ],
+    "filters": [
+      "status",
+      "recipeId"
+    ],
+    "exports": [
+      "csv",
+      "excel"
+    ]
+  },
+  {
+    "key": "quality-audits",
+    "name": "Quality Audit Results",
+    "module": "quality",
+    "entity": "qualityChecklist",
+    "columns": [
+      "title",
+      "branchId",
+      "type",
+      "score",
+      "auditorId",
+      "createdAt"
+    ],
+    "filters": [
+      "branchId",
+      "type"
+    ],
+    "exports": [
+      "csv",
+      "pdf"
+    ]
+  },
+  {
+    "key": "it-tickets-report",
+    "name": "IT Support Tickets",
+    "module": "it-helpdesk",
+    "entity": "supportTicket",
+    "columns": [
+      "number",
+      "title",
+      "category",
+      "status",
+      "priority",
+      "requesterId",
+      "assigneeId",
+      "createdAt"
+    ],
+    "filters": [
+      "status",
+      "priority",
+      "category"
+    ],
+    "exports": [
+      "csv",
+      "excel"
+    ]
+  },
+  {
+    "key": "operations-completion",
+    "name": "Operations Completion Rate",
+    "module": "operations",
+    "entity": "checklist",
+    "columns": [
+      "title",
+      "branchId",
+      "frequency",
+      "completedAt",
+      "createdAt"
+    ],
+    "filters": [
+      "branchId",
+      "frequency"
+    ],
+    "groupBy": "branchId",
+    "exports": [
+      "csv",
+      "pdf"
+    ]
+  }
+]

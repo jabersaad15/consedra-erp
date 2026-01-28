@@ -1,0 +1,39 @@
+{
+  "login": {
+    "title": "Consedra Admin",
+    "email": "Email",
+    "password": "Password",
+    "tenant": "Tenant Slug",
+    "submit": "Sign In"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "employees": "Employees",
+    "tasks": "Tasks",
+    "projects": "Projects",
+    "inventory": "Inventory",
+    "purchasing": "Purchasing",
+    "crm": "CRM",
+    "finance": "Finance",
+    "quality": "Quality",
+    "production": "Production",
+    "support": "IT Support",
+    "approvals": "Approvals",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "employees": "Employees",
+    "tasks": "Tasks",
+    "branches": "Branches",
+    "approvals": "Pending Approvals"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "noData": "No data",
+    "search": "Search..."
+  }
+}

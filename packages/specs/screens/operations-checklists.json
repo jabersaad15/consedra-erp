@@ -1,0 +1,32 @@
+{
+  "route": "/operations",
+  "title": "Operations - Checklists",
+  "module": "operations",
+  "tabs": [
+    {
+      "key": "checklists",
+      "label": "Checklists",
+      "entity": "checklist"
+    },
+    {
+      "key": "inspections",
+      "label": "Inspections",
+      "entity": "inspection"
+    },
+    {
+      "key": "issues",
+      "label": "Issues",
+      "entity": "issue"
+    }
+  ],
+  "permissions": {
+    "view": "view",
+    "create": "create",
+    "edit": "update",
+    "delete": "delete"
+  },
+  "actions": [
+    "create",
+    "export"
+  ]
+}

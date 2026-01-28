@@ -1,0 +1,61 @@
+export enum Role {
+  SUPER_ADMIN = 'SUPER_ADMIN',
+  OWNER = 'OWNER',
+  HEAD_OF_DEPARTMENT = 'HEAD_OF_DEPARTMENT',
+  EMPLOYEE = 'EMPLOYEE',
+  OPERATIONS_MANAGER = 'OPERATIONS_MANAGER',
+  FACTORY_MANAGER = 'FACTORY_MANAGER',
+  PRODUCTION_MANAGER = 'PRODUCTION_MANAGER',
+  AREA_MANAGER = 'AREA_MANAGER',
+  BRANCH_MANAGER = 'BRANCH_MANAGER',
+  ASSISTANT_BRANCH_MANAGER = 'ASSISTANT_BRANCH_MANAGER',
+  CASHIER = 'CASHIER',
+  FINANCE_MANAGER = 'FINANCE_MANAGER',
+  HR_MANAGER = 'HR_MANAGER',
+  IT_MANAGER = 'IT_MANAGER',
+  MARKETING_MANAGER = 'MARKETING_MANAGER',
+}
+
+export enum Scope {
+  COMPANY = 'COMPANY',
+  DEPARTMENT = 'DEPARTMENT',
+  REGION = 'REGION',
+  BRANCH = 'BRANCH',
+  FACTORY = 'FACTORY',
+  PROJECT = 'PROJECT',
+}
+
+export enum Permission {
+  VIEW = 'view',
+  CREATE = 'create',
+  UPDATE = 'update',
+  DELETE = 'delete',
+  APPROVE = 'approve',
+  EXPORT = 'export',
+  MANAGE_USERS = 'manage-users',
+  MANAGE_ROLES = 'manage-roles',
+  MANAGE_MODULES = 'manage-modules',
+  MANAGE_SETTINGS = 'manage-settings',
+  ASSIGN = 'assign',
+  CLOSE = 'close',
+  TRANSFER = 'transfer',
+  IMPERSONATE = 'impersonate',
+}
+
+export enum ApprovalStatus {
+  DRAFT = 'DRAFT',
+  SUBMITTED = 'SUBMITTED',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
+  CANCELLED = 'CANCELLED',
+}
+
+export enum TicketStatus {
+  OPEN = 'OPEN',
+  IN_PROGRESS = 'IN_PROGRESS',
+  RESOLVED = 'RESOLVED',
+  CLOSED = 'CLOSED',
+  ESCALATED = 'ESCALATED',
+}
+
+export const RTL_LOCALES = ['ar', 'ur', 'fa'];

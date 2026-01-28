@@ -1,0 +1,122 @@
+{
+  "connectorTemplates": [
+    {
+      "key": "foodics",
+      "name": "Foodics POS",
+      "type": "POLLING",
+      "description": "Import sales data from Foodics POS system",
+      "configSchema": {
+        "apiUrl": {
+          "type": "text",
+          "label": "API Base URL",
+          "default": "https://api.foodics.com/v5"
+        },
+        "apiKey": {
+          "type": "password",
+          "label": "API Key"
+        },
+        "businessId": {
+          "type": "text",
+          "label": "Business ID"
+        },
+        "pollInterval": {
+          "type": "number",
+          "label": "Poll Interval (minutes)",
+          "default": 15
+        }
+      },
+      "mappings": [
+        {
+          "externalField": "orders.total",
+          "internalEntity": "salesSummary",
+          "internalField": "totalSales"
+        },
+        {
+          "externalField": "orders.count",
+          "internalEntity": "salesSummary",
+          "internalField": "totalOrders"
+        },
+        {
+          "externalField": "orders.payment_methods",
+          "internalEntity": "salesSummary",
+          "internalField": "paymentBreakdown"
+        },
+        {
+          "externalField": "orders.branch_id",
+          "internalEntity": "salesSummary",
+          "internalField": "branchId",
+          "transform": "mapBranchId"
+        }
+      ]
+    },
+    {
+      "key": "generic-webhook",
+      "name": "Generic Webhook Receiver",
+      "type": "WEBHOOK",
+      "description": "Receive data via incoming webhooks",
+      "configSchema": {
+        "secret": {
+          "type": "password",
+          "label": "Webhook Secret"
+        },
+        "targetEntity": {
+          "type": "select",
+          "label": "Target Entity",
+          "options": [
+            "salesSummary",
+            "inventoryItem",
+            "crmTicket",
+            "expense"
+          ]
+        }
+      },
+      "mappings": []
+    },
+    {
+      "key": "generic-api",
+      "name": "Generic REST API Connector",
+      "type": "POLLING",
+      "description": "Pull data from any REST API endpoint",
+      "configSchema": {
+        "apiUrl": {
+          "type": "text",
+          "label": "API URL"
+        },
+        "authType": {
+          "type": "select",
+          "label": "Auth Type",
+          "options": [
+            "none",
+            "bearer",
+            "apikey",
+            "basic"
+          ]
+        },
+        "authValue": {
+          "type": "password",
+          "label": "Auth Value"
+        },
+        "pollInterval": {
+          "type": "number",
+          "label": "Poll Interval (minutes)",
+          "default": 30
+        },
+        "targetEntity": {
+          "type": "select",
+          "label": "Target Entity",
+          "options": [
+            "salesSummary",
+            "inventoryItem",
+            "crmTicket",
+            "expense"
+          ]
+        }
+      },
+      "mappings": []
+    }
+  ],
+  "webhookEndpoint": "/api/integrations/webhook/:connectorId",
+  "deadLetterRetention": "30 days",
+  "maxRetries": 5,
+  "retryBackoff": "exponential"
+}

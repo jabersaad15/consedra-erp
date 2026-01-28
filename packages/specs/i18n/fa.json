@@ -1,0 +1,48 @@
+{
+  "common": {
+    "save": "ذخیره",
+    "cancel": "لغو",
+    "delete": "حذف",
+    "edit": "ویرایش",
+    "create": "ایجاد",
+    "search": "جستجو...",
+    "export": "خروجی",
+    "filter": "فیلتر",
+    "actions": "عملیات",
+    "back": "بازگشت",
+    "submit": "ارسال",
+    "confirm": "تأیید",
+    "loading": "در حال بارگذاری...",
+    "noData": "رکوردی یافت نشد",
+    "yes": "بله",
+    "no": "خیر",
+    "status": "وضعیت",
+    "date": "تاریخ",
+    "name": "نام"
+  },
+  "auth": {
+    "login": "ورود",
+    "logout": "خروج",
+    "email": "ایمیل",
+    "password": "رمز عبور",
+    "tenant": "سازمان"
+  },
+  "nav": {
+    "dashboard": "داشبورد",
+    "operations": "عملیات",
+    "hr": "منابع انسانی",
+    "finance": "مالی",
+    "purchasing": "خرید",
+    "inventory": "انبار",
+    "sales": "فروش",
+    "crm": "خدمات مشتری",
+    "marketing": "بازاریابی",
+    "itHelpdesk": "پشتیبانی فناوری",
+    "quality": "کیفیت",
+    "production": "تولید",
+    "projects": "پروژه‌ها",
+    "approvals": "تأییدیه‌ها",
+    "reports": "گزارش‌ها",
+    "settings": "تنظیمات"
+  }
+}

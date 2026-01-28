@@ -1,0 +1,88 @@
+{
+  "key": "employee",
+  "name": "Employee",
+  "module": "hr",
+  "fields": [
+    {
+      "key": "employeeNumber",
+      "label": "Employee Number",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "firstName",
+      "label": "First Name",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "lastName",
+      "label": "Last Name",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "email",
+      "label": "Email",
+      "type": "text",
+      "required": true,
+      "validation": {
+        "format": "email"
+      }
+    },
+    {
+      "key": "phone",
+      "label": "Phone",
+      "type": "text",
+      "required": false
+    },
+    {
+      "key": "departmentId",
+      "label": "Department",
+      "type": "select",
+      "required": false,
+      "source": "departments"
+    },
+    {
+      "key": "positionId",
+      "label": "Position",
+      "type": "select",
+      "required": false,
+      "source": "positions"
+    },
+    {
+      "key": "branchId",
+      "label": "Branch",
+      "type": "select",
+      "required": false,
+      "source": "branches"
+    },
+    {
+      "key": "hireDate",
+      "label": "Hire Date",
+      "type": "date",
+      "required": true
+    },
+    {
+      "key": "contractUrl",
+      "label": "Contract",
+      "type": "file",
+      "required": false
+    }
+  ],
+  "listColumns": [
+    "employeeNumber",
+    "firstName",
+    "lastName",
+    "email",
+    "departmentId",
+    "branchId",
+    "hireDate"
+  ],
+  "searchFields": [
+    "employeeNumber",
+    "firstName",
+    "lastName",
+    "email"
+  ]
+}

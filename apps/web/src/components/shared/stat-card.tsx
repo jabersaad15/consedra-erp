@@ -1,0 +1,3 @@
+export function StatCard({ title, value, icon, change, trend }: { title: string; value: string|number; icon: React.ReactNode; change?: string; trend?: 'up'|'down'|'neutral' }) {
+  return (<div className="bg-card rounded-xl border p-6 shadow-sm"><div className="flex items-center justify-between"><div><p className="text-sm text-muted-foreground">{title}</p><p className="text-2xl font-bold mt-1">{value}</p>{change && <p className={`text-xs mt-1 ${trend==='up'?'text-green-500':trend==='down'?'text-red-500':'text-muted-foreground'}`}>{change}</p>}</div><div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-brand-600">{icon}</div></div></div>);
+}

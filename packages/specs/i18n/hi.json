@@ -1,0 +1,48 @@
+{
+  "common": {
+    "save": "सेव करें",
+    "cancel": "रद्द",
+    "delete": "हटाएं",
+    "edit": "संपादित",
+    "create": "बनाएं",
+    "search": "खोजें...",
+    "export": "निर्यात",
+    "filter": "विस्तारित",
+    "actions": "कार्रवाई",
+    "back": "वापस",
+    "submit": "जमा करें",
+    "confirm": "पुष्टि",
+    "loading": "लोड हो रहा है...",
+    "noData": "कोई रिकॉर्ड नहीं",
+    "yes": "हाँ",
+    "no": "नहीं",
+    "status": "स्थिति",
+    "date": "तारीख",
+    "name": "नाम"
+  },
+  "auth": {
+    "login": "लॉग इन",
+    "logout": "लॉग आउट",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "tenant": "संगठन"
+  },
+  "nav": {
+    "dashboard": "डैशबोर्ड",
+    "operations": "संचालन",
+    "hr": "मानव संसाधन",
+    "finance": "वित्त",
+    "purchasing": "खरीद",
+    "inventory": "इंवेंटरी",
+    "sales": "बिक्री",
+    "crm": "ग्राहक सेवा",
+    "marketing": "विपणन",
+    "itHelpdesk": "आईटी सपोर्ट",
+    "quality": "गुणवत्ता",
+    "production": "उत्पादन",
+    "projects": "परियोजनाएं",
+    "approvals": "अनुमोदन",
+    "reports": "रिपोर्टें",
+    "settings": "सेटिंग्स"
+  }
+}

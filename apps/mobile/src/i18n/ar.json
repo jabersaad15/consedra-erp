@@ -1,0 +1,39 @@
+{
+  "login": {
+    "title": "كونسيدرا أدمن",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "tenant": "معرّف المنشأة",
+    "submit": "تسجيل الدخول"
+  },
+  "nav": {
+    "dashboard": "لوحة التحكم",
+    "employees": "الموظفون",
+    "tasks": "المهام",
+    "projects": "المشاريع",
+    "inventory": "المخزون",
+    "purchasing": "المشتريات",
+    "crm": "إدارة العملاء",
+    "finance": "المالية",
+    "quality": "الجودة",
+    "production": "الإنتاج",
+    "support": "الدعم الفني",
+    "approvals": "الموافقات",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "employees": "الموظفون",
+    "tasks": "المهام",
+    "branches": "الفروع",
+    "approvals": "موافقات معلّقة"
+  },
+  "common": {
+    "loading": "جارٍ التحميل...",
+    "error": "خطأ",
+    "retry": "إعادة المحاولة",
+    "noData": "لا توجد بيانات",
+    "search": "بحث..."
+  }
+}

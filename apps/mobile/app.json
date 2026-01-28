@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "Consedra Admin",
+    "slug": "consedra-admin",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "consedra",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "backgroundColor": "#0F172A"
+    },
+    "ios": { "supportsTablet": true, "bundleIdentifier": "com.consedra.admin" },
+    "android": { "adaptiveIcon": { "backgroundColor": "#0F172A" }, "package": "com.consedra.admin" },
+    "plugins": ["expo-router", "expo-localization", "expo-secure-store"]
+  }
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "key": "dashboard",
+    "name": "Dashboard",
+    "icon": "LayoutDashboard",
+    "path": "/dashboard",
+    "category": "core",
+    "order": 0,
+    "dependencies": []
+  },
+  {
+    "key": "operations",
+    "name": "Operations",
+    "icon": "ClipboardCheck",
+    "path": "/operations",
+    "category": "business",
+    "order": 1,
+    "dependencies": []
+  },
+  {
+    "key": "hr",
+    "name": "HR",
+    "icon": "Users",
+    "path": "/hr",
+    "category": "business",
+    "order": 2,
+    "dependencies": []
+  },
+  {
+    "key": "finance",
+    "name": "Finance",
+    "icon": "DollarSign",
+    "path": "/finance",
+    "category": "business",
+    "order": 3,
+    "dependencies": []
+  },
+  {
+    "key": "purchasing",
+    "name": "Purchasing",
+    "icon": "ShoppingCart",
+    "path": "/purchasing",
+    "category": "business",
+    "order": 4,
+    "dependencies": [
+      "inventory"
+    ]
+  },
+  {
+    "key": "inventory",
+    "name": "Inventory",
+    "icon": "Package",
+    "path": "/inventory",
+    "category": "business",
+    "order": 5,
+    "dependencies": []
+  },
+  {
+    "key": "sales",
+    "name": "Sales / Revenue",
+    "icon": "TrendingUp",
+    "path": "/sales",
+    "category": "business",
+    "order": 6,
+    "dependencies": []
+  },
+  {
+    "key": "crm",
+    "name": "CRM / Customer Service",
+    "icon": "Headphones",
+    "path": "/crm",
+    "category": "business",
+    "order": 7,
+    "dependencies": []
+  },
+  {
+    "key": "marketing",
+    "name": "Marketing",
+    "icon": "Megaphone",
+    "path": "/marketing",
+    "category": "business",
+    "order": 8,
+    "dependencies": []
+  },
+  {
+    "key": "it-helpdesk",
+    "name": "IT Helpdesk",
+    "icon": "Monitor",
+    "path": "/it-helpdesk",
+    "category": "business",
+    "order": 9,
+    "dependencies": []
+  },
+  {
+    "key": "quality",
+    "name": "Quality & Compliance",
+    "icon": "ShieldCheck",
+    "path": "/quality",
+    "category": "business",
+    "order": 10,
+    "dependencies": [
+      "operations"
+    ]
+  },
+  {
+    "key": "production",
+    "name": "Manufacturing / Production",
+    "icon": "Factory",
+    "path": "/production",
+    "category": "business",
+    "order": 11,
+    "dependencies": [
+      "inventory"
+    ]
+  },
+  {
+    "key": "projects",
+    "name": "Projects & Plans",
+    "icon": "FolderKanban",
+    "path": "/projects",
+    "category": "core",
+    "order": 12,
+    "dependencies": []
+  },
+  {
+    "key": "approvals",
+    "name": "Approvals",
+    "icon": "CheckCircle",
+    "path": "/approvals",
+    "category": "core",
+    "order": 13,
+    "dependencies": []
+  },
+  {
+    "key": "forms",
+    "name": "Forms Builder",
+    "icon": "FileText",
+    "path": "/forms",
+    "category": "core",
+    "order": 14,
+    "dependencies": []
+  },
+  {
+    "key": "reports",
+    "name": "Reports & Analytics",
+    "icon": "BarChart3",
+    "path": "/reports",
+    "category": "core",
+    "order": 15,
+    "dependencies": []
+  },
+  {
+    "key": "documents",
+    "name": "Documents",
+    "icon": "FolderOpen",
+    "path": "/documents",
+    "category": "core",
+    "order": 16,
+    "dependencies": []
+  },
+  {
+    "key": "integrations",
+    "name": "Integration Hub",
+    "icon": "Plug",
+    "path": "/integrations",
+    "category": "core",
+    "order": 17,
+    "dependencies": []
+  }
+]

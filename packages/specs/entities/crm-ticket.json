@@ -1,0 +1,109 @@
+{
+  "key": "crmTicket",
+  "name": "CRM Ticket",
+  "module": "crm",
+  "fields": [
+    {
+      "key": "number",
+      "label": "Ticket #",
+      "type": "text",
+      "autoGenerate": true
+    },
+    {
+      "key": "customerName",
+      "label": "Customer Name",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "customerPhone",
+      "label": "Customer Phone",
+      "type": "text"
+    },
+    {
+      "key": "customerEmail",
+      "label": "Customer Email",
+      "type": "text"
+    },
+    {
+      "key": "subject",
+      "label": "Subject",
+      "type": "text",
+      "required": true
+    },
+    {
+      "key": "description",
+      "label": "Description",
+      "type": "textarea"
+    },
+    {
+      "key": "category",
+      "label": "Category",
+      "type": "select",
+      "options": [
+        "Complaint",
+        "Inquiry",
+        "Feedback",
+        "Return",
+        "Billing",
+        "Other"
+      ],
+      "required": true
+    },
+    {
+      "key": "status",
+      "label": "Status",
+      "type": "select",
+      "options": [
+        "OPEN",
+        "IN_PROGRESS",
+        "RESOLVED",
+        "CLOSED",
+        "ESCALATED"
+      ]
+    },
+    {
+      "key": "priority",
+      "label": "Priority",
+      "type": "select",
+      "options": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "URGENT"
+      ]
+    },
+    {
+      "key": "branchId",
+      "label": "Branch",
+      "type": "select",
+      "source": "branches"
+    },
+    {
+      "key": "assigneeId",
+      "label": "Assignee",
+      "type": "select",
+      "source": "users"
+    },
+    {
+      "key": "slaDeadline",
+      "label": "SLA Deadline",
+      "type": "date"
+    }
+  ],
+  "listColumns": [
+    "number",
+    "customerName",
+    "subject",
+    "category",
+    "status",
+    "priority",
+    "branchId",
+    "createdAt"
+  ],
+  "searchFields": [
+    "number",
+    "customerName",
+    "subject"
+  ]
+}

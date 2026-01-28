@@ -1,0 +1,48 @@
+{
+  "common": {
+    "save": "محفوظ کریں",
+    "cancel": "منسوخ",
+    "delete": "حذف کریں",
+    "edit": "ترمیم",
+    "create": "بنائیں",
+    "search": "تلاش...",
+    "export": "برآمد",
+    "filter": "فلٹر",
+    "actions": "اقدامات",
+    "back": "واپس",
+    "submit": "جمع کرائیں",
+    "confirm": "تصدیق",
+    "loading": "لوڈ ہو رہا ہے...",
+    "noData": "کوئی ریکارڈ نہیں ملا",
+    "yes": "ہاں",
+    "no": "نہیں",
+    "status": "حالت",
+    "date": "تاریخ",
+    "name": "نام"
+  },
+  "auth": {
+    "login": "لاگ ان",
+    "logout": "لاگ آؤٹ",
+    "email": "ای میل",
+    "password": "پاسورڈ",
+    "tenant": "ادارہ"
+  },
+  "nav": {
+    "dashboard": "ڈیش بورڈ",
+    "operations": "آپریشنز",
+    "hr": "انسانی وسائل",
+    "finance": "مالیات",
+    "purchasing": "خریداری",
+    "inventory": "انوینٹری",
+    "sales": "فروخت",
+    "crm": "کسٹمر سروس",
+    "marketing": "مارکیٹنگ",
+    "itHelpdesk": "آئی ٹی سپورٹ",
+    "quality": "کوالٹی",
+    "production": "پروڈکشن",
+    "projects": "پراجیکٹس",
+    "approvals": "منظوریاں",
+    "reports": "رپورٹس",
+    "settings": "ترتیبات"
+  }
+}

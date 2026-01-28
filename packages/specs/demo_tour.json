@@ -1,0 +1,183 @@
+{
+  "title": "Consedra ERP Demo Tour",
+  "credentials": {
+    "superAdmin": {
+      "email": "admin@consedra.local",
+      "password": "Admin123!"
+    },
+    "owner": {
+      "email": "owner@consedra.local",
+      "password": "Owner123!"
+    }
+  },
+  "steps": [
+    {
+      "module": "auth",
+      "action": "Login as SuperAdmin",
+      "url": "/login",
+      "notes": "Use admin@consedra.local / Admin123! with tenant: consedra"
+    },
+    {
+      "module": "dashboard",
+      "action": "View dashboard KPIs",
+      "url": "/dashboard",
+      "notes": "Verify stat cards show seeded data"
+    },
+    {
+      "module": "users",
+      "action": "List users",
+      "url": "/users",
+      "notes": "Should show 60+ employees"
+    },
+    {
+      "module": "roles",
+      "action": "View roles and permissions",
+      "url": "/roles",
+      "notes": "Check all 14 roles are seeded"
+    },
+    {
+      "module": "org-structure",
+      "action": "View org tree",
+      "url": "/org-structure",
+      "notes": "2 regions, 6 branches, 1 factory, 8 departments"
+    },
+    {
+      "module": "modules",
+      "action": "Toggle modules",
+      "url": "/modules",
+      "notes": "Disable/enable a module and check sidebar updates"
+    },
+    {
+      "module": "operations",
+      "action": "View checklists",
+      "url": "/operations",
+      "notes": "View daily checklists, inspections, and issues"
+    },
+    {
+      "module": "hr",
+      "action": "View employees and leave requests",
+      "url": "/hr",
+      "notes": "Check employee profiles and leave request approvals"
+    },
+    {
+      "module": "finance",
+      "action": "View expenses and P&L",
+      "url": "/finance",
+      "notes": "Verify expenses, journal entries, P&L computations"
+    },
+    {
+      "module": "purchasing",
+      "action": "View PO lifecycle",
+      "url": "/purchasing",
+      "notes": "Check suppliers, PRs, POs with statuses"
+    },
+    {
+      "module": "inventory",
+      "action": "View stock levels",
+      "url": "/inventory",
+      "notes": "Items, warehouses, transfers, stock levels"
+    },
+    {
+      "module": "sales",
+      "action": "View sales dashboard",
+      "url": "/sales",
+      "notes": "Revenue summaries by branch and period"
+    },
+    {
+      "module": "crm",
+      "action": "View CRM tickets",
+      "url": "/crm",
+      "notes": "80 tickets with various statuses and priorities"
+    },
+    {
+      "module": "marketing",
+      "action": "View campaigns",
+      "url": "/marketing",
+      "notes": "15 campaigns with coupons"
+    },
+    {
+      "module": "it-helpdesk",
+      "action": "View IT tickets",
+      "url": "/it-helpdesk",
+      "notes": "40 IT tickets and asset registry"
+    },
+    {
+      "module": "quality",
+      "action": "View quality audits",
+      "url": "/quality",
+      "notes": "Checklists and nonconformance records"
+    },
+    {
+      "module": "production",
+      "action": "View production orders",
+      "url": "/production",
+      "notes": "Recipes, production orders with batches"
+    },
+    {
+      "module": "projects",
+      "action": "View projects",
+      "url": "/projects",
+      "notes": "Projects with tasks and kanban view"
+    },
+    {
+      "module": "approvals",
+      "action": "View approval inbox",
+      "url": "/approvals",
+      "notes": "40 pending approvals"
+    },
+    {
+      "module": "forms",
+      "action": "View forms builder",
+      "url": "/forms",
+      "notes": "Custom form definitions"
+    },
+    {
+      "module": "reports",
+      "action": "View and export reports",
+      "url": "/reports",
+      "notes": "10 predefined reports with CSV/PDF export"
+    },
+    {
+      "module": "documents",
+      "action": "View documents",
+      "url": "/documents",
+      "notes": "Document management with tags"
+    },
+    {
+      "module": "integrations",
+      "action": "View integration hub",
+      "url": "/integrations",
+      "notes": "Connector configurations and logs"
+    },
+    {
+      "module": "audit",
+      "action": "View audit log",
+      "url": "/audit",
+      "notes": "Immutable audit trail of all actions"
+    },
+    {
+      "module": "settings",
+      "action": "View tenant settings",
+      "url": "/settings",
+      "notes": "Branding, locale, module configuration"
+    },
+    {
+      "module": "admin/tenants",
+      "action": "Manage tenants (SuperAdmin)",
+      "url": "/admin/tenants",
+      "notes": "Create and manage tenants"
+    },
+    {
+      "module": "admin/transfer",
+      "action": "Transfer ownership",
+      "url": "/admin/transfer",
+      "notes": "2-step ownership transfer flow"
+    },
+    {
+      "module": "i18n",
+      "action": "Switch language to Arabic",
+      "url": "/dashboard",
+      "notes": "Use language switcher in header, verify RTL layout"
+    }
+  ]
+}

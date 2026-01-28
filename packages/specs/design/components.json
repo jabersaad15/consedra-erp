@@ -1,0 +1,103 @@
+{
+  "button": {
+    "variants": {
+      "primary": {
+        "bg": "brand.600",
+        "text": "white",
+        "hover": "brand.700",
+        "radius": "lg",
+        "height": "40px",
+        "px": "16px"
+      },
+      "secondary": {
+        "bg": "neutral.100",
+        "text": "neutral.700",
+        "hover": "neutral.200",
+        "radius": "lg"
+      },
+      "destructive": {
+        "bg": "danger.600",
+        "text": "white",
+        "hover": "danger.700",
+        "radius": "lg"
+      },
+      "ghost": {
+        "bg": "transparent",
+        "text": "neutral.700",
+        "hover": "neutral.100",
+        "radius": "lg"
+      },
+      "outline": {
+        "bg": "transparent",
+        "border": "neutral.200",
+        "text": "neutral.700",
+        "hover": "neutral.50",
+        "radius": "lg"
+      }
+    },
+    "sizes": {
+      "sm": {
+        "height": "36px",
+        "px": "12px",
+        "fontSize": "sm"
+      },
+      "md": {
+        "height": "40px",
+        "px": "16px",
+        "fontSize": "sm"
+      },
+      "lg": {
+        "height": "44px",
+        "px": "20px",
+        "fontSize": "base"
+      }
+    }
+  },
+  "input": {
+    "height": "40px",
+    "radius": "lg",
+    "border": "neutral.200",
+    "focusRing": "brand.500",
+    "px": "12px",
+    "fontSize": "sm"
+  },
+  "card": {
+    "bg": "white",
+    "darkBg": "neutral.800",
+    "radius": "xl",
+    "border": "neutral.200",
+    "shadow": "sm",
+    "padding": "24px"
+  },
+  "table": {
+    "headerBg": "neutral.50",
+    "rowHover": "neutral.50",
+    "border": "neutral.200",
+    "cellPadding": "12px 16px",
+    "fontSize": "sm"
+  },
+  "badge": {
+    "radius": "full",
+    "px": "10px",
+    "py": "2px",
+    "fontSize": "xs",
+    "fontWeight": "medium"
+  },
+  "modal": {
+    "radius": "2xl",
+    "shadow": "xl",
+    "maxWidth": "512px",
+    "padding": "24px"
+  },
+  "toast": {
+    "radius": "lg",
+    "shadow": "lg",
+    "position": "top-right"
+  },
+  "sidebar": {
+    "width": "256px",
+    "bg": "neutral.900",
+    "textColor": "neutral.200",
+    "activeItemBg": "brand.600"
+  }
+}

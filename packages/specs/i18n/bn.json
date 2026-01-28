@@ -1,0 +1,48 @@
+{
+  "common": {
+    "save": "সংরক্ষণ",
+    "cancel": "বাতিল",
+    "delete": "মুছুন",
+    "edit": "সম্পাদনা",
+    "create": "তৈরি",
+    "search": "অনুসন্ধান...",
+    "export": "রপ্তানি",
+    "filter": "ফিল্টার",
+    "actions": "কার্যকলাপ",
+    "back": "ফিরে যান",
+    "submit": "জমা দিন",
+    "confirm": "নিশ্চিত",
+    "loading": "লোড হচ্ছে...",
+    "noData": "কোনো রেকর্ড নেই",
+    "yes": "হ্যাঁ",
+    "no": "না",
+    "status": "অবস্থা",
+    "date": "তারিখ",
+    "name": "নাম"
+  },
+  "auth": {
+    "login": "লগ ইন",
+    "logout": "লগ আউট",
+    "email": "ইমেইল",
+    "password": "পাসওয়ার্ড",
+    "tenant": "প্রতিষ্ঠান"
+  },
+  "nav": {
+    "dashboard": "ড্যাশবোর্ড",
+    "operations": "অপারেশন",
+    "hr": "মানব সম্পদ",
+    "finance": "অর্থ",
+    "purchasing": "ক্রয়",
+    "inventory": "ইনভেন্টরি",
+    "sales": "বিক্রয়",
+    "crm": "গ্রাহক সেবা",
+    "marketing": "বিপণন",
+    "itHelpdesk": "আইটি সাপোর্ট",
+    "quality": "গুণমান",
+    "production": "উৎপাদন",
+    "projects": "প্রকল্পসমূহ",
+    "approvals": "অনুমোদন",
+    "reports": "প্রতিবেদন",
+    "settings": "সেটিংস"
+  }
+}

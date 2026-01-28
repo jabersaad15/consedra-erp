@@ -1,0 +1,45 @@
+{
+  "key": "leaveRequest",
+  "name": "Leave Request",
+  "module": "hr",
+  "sections": [
+    {
+      "title": "Leave Details",
+      "fields": [
+        {
+          "key": "type",
+          "label": "Leave Type",
+          "type": "select",
+          "options": [
+            "ANNUAL",
+            "SICK",
+            "PERSONAL",
+            "MATERNITY",
+            "OTHER"
+          ],
+          "required": true
+        },
+        {
+          "key": "startDate",
+          "label": "Start Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "key": "endDate",
+          "label": "End Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "type": "textarea",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "approvalWorkflow": "leave-approval",
+  "submitLabel": "Submit Leave Request"
+}
