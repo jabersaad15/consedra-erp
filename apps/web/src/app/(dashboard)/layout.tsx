@@ -14,5 +14,5 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     if (!user) api.get('/api/auth/profile').then(r => setUser(r.data)).catch(() => router.push('/login'));
   }, [token, user]);
   if (!user) return <div className="min-h-screen flex items-center justify-center"><div className="animate-spin w-8 h-8 border-4 border-brand-600 border-t-transparent rounded-full" /></div>;
-  return (<div className="min-h-screen bg-background"><Sidebar /><div className="ml-64 rtl:ml-0 rtl:mr-64"><Header /><main className="p-6">{children}</main></div></div>);
+  return (<div className="min-h-screen bg-background" dir="rtl"><Sidebar /><div className="mr-64"><Header /><main className="p-6">{children}</main></div></div>);
 }
