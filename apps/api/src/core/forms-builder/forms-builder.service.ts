@@ -3,7 +3,7 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { buildPagination, paginatedResponse } from '../../common/utils/pagination';
 
 @Injectable()
-export class Forms-builderService {
+export class FormsBuilderService {
   constructor(private prisma: PrismaService) {}
 
   async findAll(tenantId: string, params: any) {

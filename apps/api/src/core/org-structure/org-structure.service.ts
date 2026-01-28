@@ -3,7 +3,7 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { buildPagination, paginatedResponse } from '../../common/utils/pagination';
 
 @Injectable()
-export class Org-structureService {
+export class OrgStructureService {
   constructor(private prisma: PrismaService) {}
 
   async findAll(tenantId: string, params: any) {

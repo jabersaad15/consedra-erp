@@ -1,17 +1,17 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
-import { It-helpdeskService } from './it-helpdesk.service';
+import { ItHelpdeskService } from './it-helpdesk.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { PermissionsGuard } from '../../common/guards/permissions.guard';
 import { RequirePermissions } from '../../common/decorators/permissions.decorator';
 import { CurrentTenant } from '../../common/decorators/tenant.decorator';
 
-@ApiTags('It-helpdesk')
+@ApiTags('ItHelpdesk')
 @Controller('api/it/tickets')
 @UseGuards(JwtAuthGuard, PermissionsGuard)
 @ApiBearerAuth()
-export class It-helpdeskController {
-  constructor(private svc: It-helpdeskService) {}
+export class ItHelpdeskController {
+  constructor(private svc: ItHelpdeskService) {}
 
   @Get() @RequirePermissions('view') @ApiOperation({ summary: 'List it/tickets' })
   findAll(@CurrentTenant() tenantId: string, @Query() query: any) { return this.svc.findAll(tenantId, query); }

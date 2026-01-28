@@ -1,17 +1,17 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
-import { Org-structureService } from './org-structure.service';
+import { OrgStructureService } from './org-structure.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { PermissionsGuard } from '../../common/guards/permissions.guard';
 import { RequirePermissions } from '../../common/decorators/permissions.decorator';
 import { CurrentTenant } from '../../common/decorators/tenant.decorator';
 
-@ApiTags('Org-structure')
+@ApiTags('OrgStructure')
 @Controller('api/org/regions')
 @UseGuards(JwtAuthGuard, PermissionsGuard)
 @ApiBearerAuth()
-export class Org-structureController {
-  constructor(private svc: Org-structureService) {}
+export class OrgStructureController {
+  constructor(private svc: OrgStructureService) {}
 
   @Get() @RequirePermissions('view') @ApiOperation({ summary: 'List org/regions' })
   findAll(@CurrentTenant() tenantId: string, @Query() query: any) { return this.svc.findAll(tenantId, query); }

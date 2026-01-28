@@ -1,17 +1,17 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
-import { Forms-builderService } from './forms-builder.service';
+import { FormsBuilderService } from './forms-builder.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { PermissionsGuard } from '../../common/guards/permissions.guard';
 import { RequirePermissions } from '../../common/decorators/permissions.decorator';
 import { CurrentTenant } from '../../common/decorators/tenant.decorator';
 
-@ApiTags('Forms-builder')
+@ApiTags('FormsBuilder')
 @Controller('api/forms')
 @UseGuards(JwtAuthGuard, PermissionsGuard)
 @ApiBearerAuth()
-export class Forms-builderController {
-  constructor(private svc: Forms-builderService) {}
+export class FormsBuilderController {
+  constructor(private svc: FormsBuilderService) {}
 
   @Get() @RequirePermissions('view') @ApiOperation({ summary: 'List forms' })
   findAll(@CurrentTenant() tenantId: string, @Query() query: any) { return this.svc.findAll(tenantId, query); }

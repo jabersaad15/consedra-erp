@@ -1,17 +1,17 @@
 import { Controller, Get, Post, Put, Delete, Body, Param, Query, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
-import { Integration-hubService } from './integration-hub.service';
+import { IntegrationHubService } from './integration-hub.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { PermissionsGuard } from '../../common/guards/permissions.guard';
 import { RequirePermissions } from '../../common/decorators/permissions.decorator';
 import { CurrentTenant } from '../../common/decorators/tenant.decorator';
 
-@ApiTags('Integration-hub')
+@ApiTags('IntegrationHub')
 @Controller('api/integrations')
 @UseGuards(JwtAuthGuard, PermissionsGuard)
 @ApiBearerAuth()
-export class Integration-hubController {
-  constructor(private svc: Integration-hubService) {}
+export class IntegrationHubController {
+  constructor(private svc: IntegrationHubService) {}
 
   @Get() @RequirePermissions('view') @ApiOperation({ summary: 'List integrations' })
   findAll(@CurrentTenant() tenantId: string, @Query() query: any) { return this.svc.findAll(tenantId, query); }

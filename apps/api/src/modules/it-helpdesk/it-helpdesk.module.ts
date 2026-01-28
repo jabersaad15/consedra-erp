@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { It-helpdeskService } from './it-helpdesk.service';
-import { It-helpdeskController } from './it-helpdesk.controller';
+import { ItHelpdeskService } from './it-helpdesk.service';
+import { ItHelpdeskController } from './it-helpdesk.controller';
 
 @Module({
-  controllers: [It-helpdeskController],
-  providers: [It-helpdeskService],
-  exports: [It-helpdeskService],
+  controllers: [ItHelpdeskController],
+  providers: [ItHelpdeskService],
+  exports: [ItHelpdeskService],
 })
-export class It-helpdeskModule {}
+export class ItHelpdeskModule {}

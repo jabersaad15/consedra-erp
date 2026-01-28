@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { Org-structureService } from './org-structure.service';
-import { Org-structureController } from './org-structure.controller';
+import { OrgStructureService } from './org-structure.service';
+import { OrgStructureController } from './org-structure.controller';
 
 @Module({
-  controllers: [Org-structureController],
-  providers: [Org-structureService],
-  exports: [Org-structureService],
+  controllers: [OrgStructureController],
+  providers: [OrgStructureService],
+  exports: [OrgStructureService],
 })
-export class Org-structureModule {}
+export class OrgStructureModule {}
